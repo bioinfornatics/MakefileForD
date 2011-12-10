@@ -24,6 +24,9 @@ You can override many varibale as prefix or libdir:
  $ make 
  $ make install PREFIX=/usr LIB_DIR=/usr/lib64
   
+Generate tag for geany!
+ $ make geany-tag
+
 Feature:
 --------
 - Support 3 compilers: ldc, gdc, dmd
