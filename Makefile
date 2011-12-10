@@ -37,8 +37,6 @@ header: $(HEADERS)
 doc: $(DOCUMENTATIONS)
 
 ddoc:
-	Ddoc_Files = $(DDOCUMENTATIONS)
-	doc
 	$(DC) $(DDOCUMENTATIONS) index.d $(DF)$(DOC_PATH)/index.html
 
 geany-tag:
@@ -83,7 +81,7 @@ $(IMPORT_PATH)/%.di : %.d
 
 # Generate Documentation
 $(DOC_PATH)/%.html : %.d
-	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c $(NO_OBJ) $(Ddoc_Files) $< $(DF)$@
+	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c $(NO_OBJ) $(DDOCUMENTATIONS) $< $(DF)$@
 
 # For build shared lib need create shared object files
 $(SONAME): $(PICOBJECTS)
