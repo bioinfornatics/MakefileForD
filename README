@@ -28,7 +28,7 @@ Set DFLAGS
  $ make DFLAGS="-w -d -g -O"
  
 Set Include flag
- DFLAGS_IMPORT ="-Idir1 -Idir2"
+ DFLAGS_IMPORT="-Idir1 -Idir2"
   
 Generate tag for geany!
  $ make geany-tag

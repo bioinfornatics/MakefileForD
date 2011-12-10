@@ -162,11 +162,11 @@ endif
 
 ifndef DATA_DIR
     ifeq ($(OS), "Windows") 
-        INCLUDE_DIR = $(PROGRAMFILES)\$(PROJECT_NAME)\data
+        DATA_DIR = $(PROGRAMFILES)\$(PROJECT_NAME)\data
     else ifeq ($(OS), "Linux")
-        INCLUDE_DIR = $(PREFIX)/share/$(PROJECT_NAME)
+        DATA_DIR = $(PREFIX)/share/$(PROJECT_NAME)
     else ifeq ($(OS), "Darwin")
-        INCLUDE_DIR = $(PREFIX)/share/$(PROJECT_NAME)
+        DATA_DIR = $(PREFIX)/share/$(PROJECT_NAME)
     endif
 endif
  
