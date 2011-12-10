@@ -37,7 +37,7 @@ header: $(HEADERS)
 doc: $(DOCUMENTATIONS)
 
 ddoc:
-	Ddoc_Files = $(DDOCFILES)
+	Ddoc_Files = $(DDOCUMENTATIONS)
 	doc
 	$(DC) $(DDOCUMENTATIONS) index.d $(DF)$(DOC_PATH)/index.html
 
