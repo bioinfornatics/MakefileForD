@@ -1,5 +1,5 @@
 # This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
+# it under the terms of the GNU Lesser General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
@@ -179,7 +179,7 @@ IMPORT_PATH        = ./import
 DOC_PATH           = ./doc
 BUILD_PATH         = ./build
  
-DFLAGS_IMPORT      = -I"gl3n"
+DFLAGS_IMPORT      = 
 DFLAGS_LINK        = $(LDFLAGS)
  
 LIBNAME_GL3N       = lib$(PROJECT_NAME)-$(COMPILER)$(STATIC_LIB_EXT)

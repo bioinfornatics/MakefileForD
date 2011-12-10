@@ -23,9 +23,18 @@ Use -j flag for multithreading:
 You can override many varibale as prefix or libdir:
  $ make 
  $ make install PREFIX=/usr LIB_DIR=/usr/lib64
+ 
+Set DFLAGS
+ $ make DFLAGS="-w -d -g -O"
+ 
+Set Include flag
+ DFLAGS_IMPORT ="-Idir1 -Idir2"
   
 Generate tag for geany!
  $ make geany-tag
+ 
+Generate pkgconfig file
+ $ make pkgfile
 
 Feature:
 --------

@@ -1,5 +1,5 @@
 # This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
+# it under the terms of the Lesser GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
@@ -21,7 +21,7 @@ SOURCES             =
 # include some command
 include command.make
 
-DDOCFILES	        = cutedoc.ddoc settings.ddoc modules.ddoc
+DDOCFILES	        = 
 OBJECTS             = $(patsubst %.d,$(BUILD_PATH)/%.o,    $(SOURCES))
 PICOBJECTS          = $(patsubst %.d,$(BUILD_PATH)/%.pic.o,$(SOURCES))
 HEADERS             = $(patsubst %.d,$(IMPORT_PATH)/%.di,  $(SOURCES))
@@ -56,21 +56,21 @@ geany-tag:
 
 pkgfile:
 	@echo ------------------ creating pkg-config file
-	@echo "# Package Information for pkg-config"        >  $(PKG_CONFIG_FILE)
-	@echo "# Author: $(AUTHOR)"                         >> $(PKG_CONFIG_FILE)
-	@echo "# Created: `date`"                           >> $(PKG_CONFIG_FILE)
-	@echo "# Licence: $(LICENSE)"                       >> $(PKG_CONFIG_FILE)
-	@echo                                               >> $(PKG_CONFIG_FILE)
-	@echo prefix=$(PREFIX)                              >> $(PKG_CONFIG_FILE)
-	@echo libdir=$(LIB_DIR)                             >> $(PKG_CONFIG_FILE)
-	@echo includedir=$(INCLUDE_DIR)                     >> $(PKG_CONFIG_FILE)
-	@echo                                               >> $(PKG_CONFIG_FILE)
-	@echo Name: "$(PROJECT_NAME)"                       >> $(PKG_CONFIG_FILE)
-	@echo Description: "$(DESCRIPTION)"                 >> $(PKG_CONFIG_FILE)
-	@echo Version: "$(VERSION)"                         >> $(PKG_CONFIG_FILE)
-	@echo Libs: -L$(LIB_DIR) -l$(PROJECT_NAME)-COMPILER >> $(PKG_CONFIG_FILE)
-	@echo Cflags: -I$(INCLUDE_DIR)                      >> $(PKG_CONFIG_FILE)
-	@echo                                               >> $(PKG_CONFIG_FILE)
+	@echo "# Package Information for pkg-config"          >  $(PKG_CONFIG_FILE)
+	@echo "# Author: $(AUTHOR)"                           >> $(PKG_CONFIG_FILE)
+	@echo "# Created: `date`"                             >> $(PKG_CONFIG_FILE)
+	@echo "# Licence: $(LICENSE)"                         >> $(PKG_CONFIG_FILE)
+	@echo                                                 >> $(PKG_CONFIG_FILE)
+	@echo prefix=$(PREFIX)                                >> $(PKG_CONFIG_FILE)
+	@echo libdir=$(LIB_DIR)                               >> $(PKG_CONFIG_FILE)
+	@echo includedir=$(INCLUDE_DIR)                       >> $(PKG_CONFIG_FILE)
+	@echo                                                 >> $(PKG_CONFIG_FILE)
+	@echo Name: "$(PROJECT_NAME)"                         >> $(PKG_CONFIG_FILE)
+	@echo Description: "$(DESCRIPTION)"                   >> $(PKG_CONFIG_FILE)
+	@echo Version: "$(VERSION)"                           >> $(PKG_CONFIG_FILE)
+	@echo Libs: -L$(LIB_DIR) -l$(PROJECT_NAME)-$(COMPILER)>> $(PKG_CONFIG_FILE)
+	@echo Cflags: -I$(INCLUDE_DIR)                        >> $(PKG_CONFIG_FILE)
+	@echo                                                 >> $(PKG_CONFIG_FILE)
 	
 
 # For build lib need create object files and after run make-lib
@@ -116,6 +116,6 @@ install:
 	$(CP) $(DLIB_PATH)/* $(LIB_DIR)
 	$(MKDIR) $(INCLUDE_DIR)
 	$(MV) $(IMPORT_PATH) $(INCLUDE_DIR)
-	$(MKDIR)$(DATA_DIR)/pkgconfig/
+	$(MKDIR) $(DATA_DIR)/pkgconfig/
 	$(CP) $(PKG_CONFIG_FILE) $(DATA_DIR)/pkgconfig/
 
