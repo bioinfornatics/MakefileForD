@@ -152,9 +152,9 @@ ifndef DATA_DIR
     ifeq ($(OS), "Windows") 
         DATA_DIR = $(PROGRAMFILES)\$(PROJECT_NAME)\data
     else ifeq ($(OS), "Linux")
-        DATA_DIR = $(PREFIX)/share/
+        DATA_DIR = $(PREFIX)/share
     else ifeq ($(OS), "Darwin")
-        DATA_DIR = $(PREFIX)/share/
+        DATA_DIR = $(PREFIX)/share
     endif
 endif
 
@@ -162,9 +162,9 @@ ifndef PKGCONFIG_DIR
     ifeq ($(OS), "Windows") 
         PKGCONFIG_DIR = $(PROGRAMFILES)\$(PROJECT_NAME)\data
     else ifeq ($(OS), "Linux")
-        PKGCONFIG_DIR = $(DATA_DIR)/pkgconfig/
+        PKGCONFIG_DIR = $(DATA_DIR)/pkgconfig
     else ifeq ($(OS), "Darwin")
-        PKGCONFIG_DIR = $(DATA_DIR)/pkgconfig/
+        PKGCONFIG_DIR = $(DATA_DIR)/pkgconfig
     endif
 endif
  
