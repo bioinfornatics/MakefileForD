@@ -65,6 +65,7 @@ ifeq ($(DC),gdc)
     HF        = -fintfc-file=
     DF        = -fdoc-file=
     NO_OBJ    = -fsyntax-only
+    DDOC_MACRO= -fdoc-inc=
 else
     DFLAGS    = -O -d
     LINKERFLAG= -L
@@ -72,6 +73,7 @@ else
     HF        = -Hf
     DF        = -Df
     NO_OBJ    = -o-
+    DDOC_MACRO=
 endif
  
 #define a suufix lib who inform is build with which compiler

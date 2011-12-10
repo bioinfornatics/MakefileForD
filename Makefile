@@ -5,15 +5,16 @@ export DESCRIPTION  =
 export VERSION      = 
 export LICENSE      = 
 SOURCES             = 
+DDOCFILES	        = 
 
 # include some command
 include command.make
 
-DDOCFILES	        = 
 OBJECTS             = $(patsubst %.d,$(BUILD_PATH)/%.o,    $(SOURCES))
 PICOBJECTS          = $(patsubst %.d,$(BUILD_PATH)/%.pic.o,$(SOURCES))
 HEADERS             = $(patsubst %.d,$(IMPORT_PATH)/%.di,  $(SOURCES))
 DOCUMENTATIONS      = $(patsubst %.d,$(DOC_PATH)/%.html,   $(SOURCES))
+DDOCUMENTATIONS     = $(foreach macro,$(DDOCFILES),$($(DDOC_MACRO)$(macro)))
 define make-lib
 	$(MKDIR) $(DLIB_PATH)
 	$(AR) rcs $(DLIB_PATH)/$@ $^
@@ -36,7 +37,7 @@ header: $(HEADERS)
 doc: $(DOCUMENTATIONS)
 
 ddoc:
-	$(DC) $(DDOCFILES) index.d $(DF)$(DOC_PATH)/index.html
+	$(DC) $(DDOCUMENTATIONS) index.d $(DF)$(DOC_PATH)/index.html
 
 geany-tag:
 	$(MKDIR) geany_config
@@ -80,7 +81,7 @@ $(IMPORT_PATH)/%.di : %.d
 
 # Generate Documentation
 $(DOC_PATH)/%.html : %.d
-	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c $(NO_OBJ) $< $(DDOCFILES) $(DF)$@
+	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c $(NO_OBJ) $< $(DF)$@
 
 # For build shared lib need create shared object files
 $(SONAME): $(PICOBJECTS)
