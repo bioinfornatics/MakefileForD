@@ -39,9 +39,9 @@ all: static-libs header doc pkgfile
 .PHONY : ddoc
 .PHONY : clean
 
-static-libs: $(LIBNAME_GL3N)
+static-libs: $(LIBNAME)
 
-shared-libs: $(SONAME_GL3N)
+shared-libs: $(SONAME)
 
 header: $(HEADERS)
 
@@ -74,7 +74,7 @@ pkgfile:
 	
 
 # For build lib need create object files and after run make-lib
-$(LIBNAME_GL3N): $(OBJECTS)
+$(LIBNAME): $(OBJECTS)
 	$(make-lib)
 
 # create object files
@@ -94,7 +94,7 @@ $(DOC_PATH)/%.html : %.d
 	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c -o- $< $(DDOCFILES) $(DF)$@
 
 # For build shared lib need create shared object files
-$(SONAME_GL3N): $(PICOBJECTS)
+$(SONAME): $(PICOBJECTS)
 	$(MKDIR) $(DLIB_PATH)
 	$(CC) -shared $^ -o $(DLIB_PATH)/$@
 
@@ -105,7 +105,7 @@ $(BUILD_PATH)/%.pic.o : %.d
 clean:
 	$(RM) $(OBJECTS)
 	$(RM) $(PICOBJECTS)
-	$(RM) $(LIBNAME_GL3N)
+	$(RM) $(LIBNAME)
 	$(RM) $(HEADERS)
 	$(RM) $(DOCUMENTATIONS)
 	$(RM) $(DOC_PATH)/index.html
