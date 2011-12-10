@@ -64,7 +64,7 @@ ifeq ($(DC),gdc)
     OUTPUT    = -o
     HF        = -fintfc-file=
     DF        = -fdoc-file=
-    NO_OBJ    =
+    NO_OBJ    = -c
 else
     DFLAGS    = -O -d
     LINKERFLAG= -L
