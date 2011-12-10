@@ -1,0 +1,37 @@
+============
+MakefileForD
+============
+
+This project provides a template build system for use D project
+
+What you need to do:
+--------------------
+ - take Makefile and command.make
+ - put at root of your project
+ - set variables into Makefile: PROJECT_NAME, AUTHOR, DESCRIPTION, VERSION, LICENSE, SOURCES 
+ 
+How build your project:
+-----------------------
+In same directory where is the file Makefile do:
+ $ make
+ $ make install
+ 
+Use -j flag for multithreading:
+ $ make -j
+ $ make install -j
+ 
+You can override many varibale as prefix or libdir:
+ $ make 
+ $ make install PREFIX=/usr LIB_DIR=/usr/lib64
+  
+Feature:
+--------
+- Support 3 compilers: ldc, gdc, dmd
+- Build as static lib or shared
+- Generate geany tag
+- Generate package config file
+
+TODO:
+-----
+- Use pkg-config for set flag when there are some dependencies
+- Add Windows support
