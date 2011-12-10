@@ -117,5 +117,5 @@ install:
 	$(MKDIR) $(INCLUDE_DIR)
 	$(CP) $(IMPORT_PATH) $(INCLUDE_DIR)
 	$(MKDIR) $(DATA_DIR)/pkgconfig/
-	$(CP) $(PKG_CONFIG_FILE) $(DATA_DIR)/pkgconfig/
+	$(CP) $(PKG_CONFIG_FILE) $(PKGCONFIG_DIR)
 
