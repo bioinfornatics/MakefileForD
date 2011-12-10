@@ -60,7 +60,7 @@ endif
 # Define flag for gdc other
 ifeq ($(DC),gdc)
     DFLAGS    = -O2 -fdeprecated
-    LINKERFLAG= -Xlinker
+    LINKERFLAG= -Xlinker 
     OUTPUT    = -o
     HF        = -fintfc-file=
     DF        = -fdoc-file=
