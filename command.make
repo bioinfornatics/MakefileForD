@@ -64,12 +64,14 @@ ifeq ($(DC),gdc)
     OUTPUT    = -o
     HF        = -fintfc-file=
     DF        = -fdoc-file=
+    NO_OBJ    =
 else
     DFLAGS    = -O -d
     LINKERFLAG= -L
     OUTPUT    = -of
     HF        = -Hf
     DF        = -Df
+    NO_OBJ    = -c -o-
 endif
  
 #define a suufix lib who inform is build with which compiler

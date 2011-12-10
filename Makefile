@@ -76,11 +76,11 @@ $(BUILD_PATH)/%.pic.o : %.d
 
 # Generate Header files
 $(IMPORT_PATH)/%.di : %.d
-	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c -o- $< $(HF)$@
+	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) $(NO_OBJ) $< $(HF)$@
 
 # Generate Documentation
 $(DOC_PATH)/%.html : %.d
-	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c -o- $< $(DDOCFILES) $(DF)$@
+	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) $(NO_OBJ) $< $(DDOCFILES) $(DF)$@
 
 # For build shared lib need create shared object files
 $(SONAME): $(PICOBJECTS)
