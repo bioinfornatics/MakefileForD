@@ -116,6 +116,6 @@ install:
 	$(CP) $(DLIB_PATH)/* $(LIB_DIR)
 	$(MKDIR) $(INCLUDE_DIR)
 	$(CP) $(IMPORT_PATH) $(INCLUDE_DIR)
-	$(MKDIR) $(DATA_DIR)/pkgconfig/
+	$(MKDIR) $(PKGCONFIG_DIR)
 	$(CP) $(PKG_CONFIG_FILE) $(PKGCONFIG_DIR)
 
