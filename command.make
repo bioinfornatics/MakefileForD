@@ -192,8 +192,8 @@ BUILD_PATH         = ./build
 DFLAGS_IMPORT      = 
 DFLAGS_LINK        = $(LDFLAGS)
  
-LIBNAME_GL3N       = lib$(PROJECT_NAME)-$(COMPILER)$(STATIC_LIB_EXT)
-SONAME_GL3N        = lib$(PROJECT_NAME)-$(COMPILER)$(DYNAMIC_LIB_EXT)
+LIBNAME       = lib$(PROJECT_NAME)-$(COMPILER)$(STATIC_LIB_EXT)
+SONAME        = lib$(PROJECT_NAME)-$(COMPILER)$(DYNAMIC_LIB_EXT)
 
 PKG_CONFIG_FILE    = $(PROJECT_NAME).pc
 
@@ -224,7 +224,7 @@ export INCLUDE_DIR
 export IMPORT_PATH
 export LDFLAGS
 export FPIC
-export LIBNAME_GL3N
+export LIBNAME
 export LIB_DIR
 export LINKERFLAG
 export message
@@ -239,4 +239,4 @@ export PREFIX
 export RANLIB
 export RM
 export STATIC_LIB_EXT
-export SONAME_GL3N
+export SONAME
