@@ -38,11 +38,11 @@ shared-lib: $(SONAME)
 header: $(HEADERS)
 
 doc: $(DOCUMENTATIONS)
-	@echo ------------------ Creating DDoc done
+	@echo ------------------ Building Doc done
 
 ddoc: $(DDOCUMENTATIONS)
 	$(DC) $(DDOC_FLAGS) index.d $(DF)$(DDOC_PATH)$(PATH_SEP)index.html
-	@echo ------------------ Building cute DDoc done
+	@echo ------------------ Building DDoc done
 
 geany-tag:
 	@echo ------------------ Building geany tag
