@@ -211,7 +211,7 @@ RANLIB             = ranlib
 export AR
 export ARCH
 export ARFLAGS
-ecport BIN_DIR
+export BIN_DIR
 export BUILD_PATH
 export CC
 export COMPILER
@@ -224,6 +224,7 @@ export DFLAGS_IMPORT
 export DFLAGS_LINK
 export DLIB_PATH
 export DOC_PATH
+export DDOC_PATH
 export DYNAMIC_LIB_EXT
 export FixPath
 export HF

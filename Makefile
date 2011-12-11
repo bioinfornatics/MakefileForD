@@ -14,7 +14,7 @@ OBJECTS             = $(patsubst %.d,$(BUILD_PATH)$(PATH_SEP)%.o,    $(SOURCES))
 PICOBJECTS          = $(patsubst %.d,$(BUILD_PATH)$(PATH_SEP)%.pic.o,$(SOURCES))
 HEADERS             = $(patsubst %.d,$(IMPORT_PATH)$(PATH_SEP)%.di,  $(SOURCES))
 DOCUMENTATIONS      = $(patsubst %.d,$(DOC_PATH)$(PATH_SEP)%.html,   $(SOURCES))
-DDOCUMENTATIONS     = $(patsubst %.d,$(DDOC_PATH)$(PATH_SEP)%.html,  $(SOURCES))
+DDOCUMENTATIONS     = $(patsubst %.d,$(DDOC_PATH)/%.html,  $(SOURCES))
 DDOC_FLAGS          = $(foreach macro,$(DDOCFILES), $(DDOC_MACRO)$(macro))
 define make-lib
 	$(MKDIR) $(DLIB_PATH)
@@ -39,8 +39,8 @@ header: $(HEADERS)
 
 doc: $(DOCUMENTATIONS)
 
-ddoc:
-	$(DC) $(DDOC_FLAGS) index.d $(DF)$(DOC_PATH)$(PATH_SEP)index.html
+ddoc: $(DDOCUMENTATIONS)
+	$(DC) $(DDOC_FLAGS) index.d $(DF)$(DDOC_PATH)$(PATH_SEP)index.html
 
 geany-tag:
 	@echo ------------------ creating geany tag
@@ -142,7 +142,7 @@ install-static-lib:
 	$(MKDIR) $(LIB_DIR)
 	$(CP) $(DLIB_PATH)$(PATH_SEP)$(LIBNAME) $(LIB_DIR)
 
-install-static-lib:
+install-shared-lib:
 	$(MKDIR) $(LIB_DIR)
 	$(CP) $(DLIB_PATH)$(PATH_SEP)$(SONAME) $(LIB_DIR)
 	
@@ -166,4 +166,3 @@ install-pkgfile:
 	$(MKDIR) $(PKGCONFIG_DIR)
 	$(CP) $(PKG_CONFIG_FILE) $(PKGCONFIG_DIR)
 	
-
