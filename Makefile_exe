@@ -17,13 +17,13 @@ DOCUMENTATIONS      = $(patsubst %.d,$(DOC_PATH)$(PATH_SEP)%.html,   $(SOURCES))
 DDOCUMENTATIONS     = $(patsubst %.d,$(DDOC_PATH)$(PATH_SEP)%.html,  $(SOURCES))
 DDOC_FLAGS          = $(foreach macro,$(DDOCFILES), $(DDOC_MACRO)$(macro))
 
-all: exe header doc 
+all: executable header doc 
 
 .PHONY : doc
 .PHONY : ddoc
 .PHONY : clean
 
-exe: $(EXE_NAME)
+executable: $(EXE_NAME)
 
 header: $(HEADERS)
 
@@ -55,7 +55,7 @@ $(DDOC_PATH)$(PATH_SEP)%.html : %.d
 
 	
 ############# CLEAN ############# 
-clean: clean-objects clean-sstatic-lib clean-doc clean-header clean-pkgfile
+clean: clean-objects clean-executable clean-doc clean-header clean-pkgfile
 	@echo ------------------ cleaning $^ done
 
 clean-objects:
