@@ -5,7 +5,7 @@ export DESCRIPTION  =
 export VERSION      = 
 export LICENSE      = 
 SOURCES             = 
-DDOCFILES	        = 
+DDOCFILES	        =
 
 # include some command
 include command.make
@@ -14,7 +14,7 @@ OBJECTS             = $(patsubst %.d,$(BUILD_PATH)/%.o,    $(SOURCES))
 PICOBJECTS          = $(patsubst %.d,$(BUILD_PATH)/%.pic.o,$(SOURCES))
 HEADERS             = $(patsubst %.d,$(IMPORT_PATH)/%.di,  $(SOURCES))
 DOCUMENTATIONS      = $(patsubst %.d,$(DOC_PATH)/%.html,   $(SOURCES))
-DDOCUMENTATIONS     = $(foreach macro,$(DDOCFILES),$($(DDOC_MACRO)$(macro)))
+DDOCUMENTATIONS     = $(foreach macro,$(DDOCFILES), $(DDOC_MACRO)$(macro))
 define make-lib
 	$(MKDIR) $(DLIB_PATH)
 	$(AR) rcs $(DLIB_PATH)/$@ $^
@@ -40,6 +40,7 @@ ddoc:
 	$(DC) $(DDOCUMENTATIONS) index.d $(DF)$(DOC_PATH)/index.html
 
 geany-tag:
+	@echo ------------------ creating geany tag
 	$(MKDIR) geany_config
 	geany -c geany_config -g $(PROJECT_NAME).d.tags $(SOURCES)
 
@@ -65,6 +66,7 @@ pkgfile:
 
 # For build lib need create object files and after run make-lib
 $(LIBNAME): $(OBJECTS)
+	@echo ------------------ creating static library
 	$(make-lib)
 
 # create object files
@@ -77,7 +79,7 @@ $(BUILD_PATH)/%.pic.o : %.d
 
 # Generate Header files
 $(IMPORT_PATH)/%.di : %.d
-	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c  $(NO_OBJ) $< $(HF)$@
+	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c $(NO_OBJ) $< $(HF)$@
 
 # Generate Documentation
 $(DOC_PATH)/%.html : %.d
@@ -85,6 +87,7 @@ $(DOC_PATH)/%.html : %.d
 
 # For build shared lib need create shared object files
 $(SONAME): $(PICOBJECTS)
+	@echo ------------------ creating shared library
 	$(MKDIR) $(DLIB_PATH)
 	$(CC) -shared $^ -o $(DLIB_PATH)/$@
 
@@ -93,6 +96,7 @@ $(BUILD_PATH)/%.pic.o : %.d
 	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(FPIC) $(DFLAGS_IMPORT) -c $< $(OUTPUT) $@ 
 
 clean:
+	@echo ------------------ cleaning
 	$(RM) $(OBJECTS)
 	$(RM) $(PICOBJECTS)
 	$(RM) $(LIBNAME)
@@ -102,6 +106,7 @@ clean:
 	$(RM) $(PKG_CONFIG_FILE)
 
 install:
+	@echo ------------------ Installing
 	$(MKDIR) $(LIB_DIR)
 	$(CP) $(DLIB_PATH)/* $(LIB_DIR)
 	$(MKDIR) $(INCLUDE_DIR)
