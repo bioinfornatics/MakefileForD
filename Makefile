@@ -97,7 +97,6 @@ $(DOC_PATH)$(PATH_SEP)%.html : %.d
 # Generate ddoc Documentation
 $(DDOC_PATH)$(PATH_SEP)%.html : %.d
 	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c $(NO_OBJ) $(DDOC_FLAGS) $< $(DF)$@
-
 	
 ############# CLEAN ############# 
 clean: clean-objects clean-static-lib clean-doc clean-header clean-pkgfile
@@ -123,7 +122,7 @@ clean-doc:
 	$(RM) $(DOC_PATH)
 	
 clean-ddoc:
-	$(RM) $(DOC_PATH)$(PATH_SEP)index.html
+	$(RM) $(DDOC_PATH)$(PATH_SEP)index.html
 	$(RM) $(DDOC_PATH)
 
 clean-geany-tag:
