@@ -3,6 +3,9 @@ MakefileForD
 ============
 
 This project provides a template build system for use D project
+Makefile    -> library
+Makfile_exe -> executable could to be renamed
+in all case you need add command.make in same directory
 
 What you need to do:
 --------------------
