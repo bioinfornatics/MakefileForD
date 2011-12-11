@@ -62,11 +62,11 @@ Others targets:
 
 How Clean your project:
 -----------------------
-Each build targets has a clean targets by example if you have build with shared-lib target use clean-shared-lib target
+Each build targets has a clean target by example if you have built with "shared-lib" target use "clean-shared-lib" target
 
 How Install your project:
 -------------------------:
-Each build targets has a install targets by example if you have build with shared-lib target use install-shared-lib target
+Each build targets has a install target by example if you have builti with "shared-lib" target use "install-shared-lib" target
 
 RESUME:
 -------
