@@ -2,9 +2,11 @@ ifdef SystemRoot
     OS              = "Windows"
     STATIC_LIB_EXT  = .lib
     DYNAMIC_LIB_EXT = .dll
+    PATH_SEP        =\
     FixPath         = $(subst /,\,$1)
     message         = @(echo $1)
 else
+    PATH_SEP        =/
     ifeq ($(shell uname), Linux)
         OS              = "Linux"
         STATIC_LIB_EXT  = .a
@@ -179,6 +181,7 @@ endif
 DLIB_PATH          = ./lib
 IMPORT_PATH        = ./import
 DOC_PATH           = ./doc
+DDOC_PATH          = ./ddoc
 BUILD_PATH         = ./build
  
 DFLAGS_IMPORT      = 
@@ -226,6 +229,7 @@ export MODEL
 export MV
 export OUTPUT
 export OS
+export PATH_SEP
 export PKG_CONFIG_FILE
 export PREFIX
 export RANLIB
