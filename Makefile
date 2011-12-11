@@ -14,7 +14,7 @@ OBJECTS             = $(patsubst %.d,$(BUILD_PATH)$(PATH_SEP)%.o,    $(SOURCES))
 PICOBJECTS          = $(patsubst %.d,$(BUILD_PATH)$(PATH_SEP)%.pic.o,$(SOURCES))
 HEADERS             = $(patsubst %.d,$(IMPORT_PATH)$(PATH_SEP)%.di,  $(SOURCES))
 DOCUMENTATIONS      = $(patsubst %.d,$(DOC_PATH)$(PATH_SEP)%.html,   $(SOURCES))
-DDOCUMENTATIONS     = $(patsubst %.d,$(DDOC_PATH)/%.html,  $(SOURCES))
+DDOCUMENTATIONS     = $(patsubst %.d,$(DDOC_PATH)$(PATH_SEP)%.html,  $(SOURCES))
 DDOC_FLAGS          = $(foreach macro,$(DDOCFILES), $(DDOC_MACRO)$(macro))
 define make-lib
 	$(MKDIR) $(DLIB_PATH)
@@ -123,7 +123,6 @@ clean-doc:
 	$(RM) $(DOC_PATH)
 	
 clean-ddoc:
-	$(RM) $(DDOCFILES)
 	$(RM) $(DOC_PATH)$(PATH_SEP)index.html
 	$(RM) $(DDOC_PATH)
 
