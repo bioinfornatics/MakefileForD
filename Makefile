@@ -23,16 +23,17 @@ define make-lib
 endef
 	
 ############# BUILD ############# 
-all: static-libs header doc pkgfile
+all: static-lib header doc pkgfile
+	@echo ------------------ building $^ done
 
 .PHONY : pkgfile
 .PHONY : doc
 .PHONY : ddoc
 .PHONY : clean
 
-static-libs: $(LIBNAME)
+static-lib: $(LIBNAME)
 
-shared-libs: $(SONAME)
+shared-lib: $(SONAME)
 
 header: $(HEADERS)
 
@@ -99,11 +100,8 @@ $(DDOC_PATH)$(PATH_SEP)%.html : %.d
 
 	
 ############# CLEAN ############# 
-clean:
-	@echo ------------------ cleaning
-	clean-all
-
-clean-all: clean-objects clean-static-lib clean-doc clean-header clean-pkgfile
+clean: clean-objects clean-sstatic-lib clean-doc clean-header clean-pkgfile
+	@echo ------------------ cleaning $^ done
 
 clean-objects:
 	$(RM) $(OBJECTS)
@@ -111,7 +109,7 @@ clean-objects:
 clean-shared-objects:
 	$(RM) $(PICOBJECTS)
 
-clean-static-lib:
+clean-sstatic-lib:
 	$(RM) $(SONAME)
 	
 clean-shared-lib:
@@ -135,18 +133,16 @@ clean-geany-tag:
 clean-pkgfile:
 	$(RM) $(PKG_CONFIG_FILE)
 	
-############# INSTALL ############# 
-install:
-	@echo ------------------ Installing
-	install-all
+############# INSTALL #############
 	
-install-all: install-static-lib install-doc install-header install-pkgfile
+install: install-sstatic-lib install-doc install-header install-pkgfile
+	@echo ------------------ Installing $^ done
 
-install-static-lib:
+install-sstatic-lib:
 	$(MKDIR) $(LIB_DIR)
 	$(CP) $(DLIB_PATH)$(PATH_SEP)$(LIBNAME) $(LIB_DIR)
 
-install-static-lib:
+install-sstatic-lib:
 	$(MKDIR) $(LIB_DIR)
 	$(CP) $(DLIB_PATH)$(PATH_SEP)$(SONAME) $(LIB_DIR)
 	

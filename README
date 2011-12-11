@@ -9,6 +9,10 @@ What you need to do:
  - take Makefile and command.make
  - put at root of your project
  - set variables into Makefile: PROJECT_NAME, AUTHOR, DESCRIPTION, VERSION, LICENSE, SOURCES 
+
+Tips:
+-----
+when you need to write a pth like for set SOURCES var use $(PATH_SEP) instead / or \ this allow support both windows and *NIX
  
 How build your project:
 -----------------------
@@ -30,11 +34,51 @@ Set DFLAGS
 Set Include flag
  DFLAGS_IMPORT="-Idir1 -Idir2"
   
-Generate tag for geany!
+Generate tag for geany
  $ make geany-tag
  
 Generate pkgconfig file
  $ make pkgfile
+
+Generate Ddoc
+ $ make ddoc
+
+Generate shared lib:
+ $ make shared-lib
+
+Combine targets together:
+$ make -j all shared-lib  ddoc DFLAGS_IMPORT="-ImySourceDir"
+
+Default target:
+ all: able to build static lib, doc, header, pkg-confih file
+
+Others targets:
+- shared-lib
+- ddoc
+- geany-tag
+
+How Clean your project:
+-----------------------
+Each build targets has a clean targets by example if you have build with shared-lib target use clean-shared-lib target
+
+How Install your project:
+-------------------------:
+Each build targets has a install targets by example if you have build with shared-lib target use install-shared-lib target
+
+RESUME:
+-------
+
+BUILD       | CLEAN            | INSTALL
+___________________________________________________
+all         | clean            | install
+static-libs | clean-static-lib | install-static-lib
+shared-lib  | clean-shared-lib | install-shared-lib
+header      | clean-header     | install-header
+doc         | clean-doc        | install-doc
+ddoc        | clean-ddoc       | install-ddoc
+geany-tag   | clean-geany-tag  | install-geany-tag
+pkgfile     | clean-pkgfile    | install-pkgfile
+
 
 Feature:
 --------

@@ -35,12 +35,12 @@ ifeq ($(OS),"Windows")
     MKDIR = mkdir
     MV    = move
 else ifeq ($(OS),"Linux")
-    RM    = rm -f
+    RM    = rm -fr
     CP    = cp -fr
     MKDIR = mkdir -p
     MV    = mv
 else ifeq ($(OS),"Darwin")
-    RM    = rm -f
+    RM    = rm -fr
     CP    = cp -fr
     MKDIR = mkdir -p
     MV    = mv
