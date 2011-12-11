@@ -125,7 +125,7 @@ else
     LDFLAGS += -m32
 endif
  
-# Define var PREFIX, LIB_DIR and INCLUDEDIR
+# Define var PREFIX, BIN_DIR, LIB_DIR, INCLUDE_DIR, DATA_DIR
 ifndef PREFIX
     ifeq ($(OS),"Windows") 
         PREFIX = $(PROGRAMFILES)
@@ -133,6 +133,16 @@ ifndef PREFIX
         PREFIX = /usr/local
     else ifeq ($(OS), "Darwin")
         PREFIX = /usr/local
+    endif
+endif
+
+ifndef BIN_DIR
+    ifeq ($(OS), "Windows") 
+        BIN_DIR = $(PROGRAMFILES)\$(PROJECT_NAME)\bin
+    else ifeq ($(OS), "Linux")
+        BIN_DIR = $(PREFIX)/bin
+    else ifeq ($(OS), "Darwin")
+        BIN_DIR = $(PREFIX)/bin
     endif
 endif
 ifndef LIB_DIR
@@ -144,6 +154,7 @@ ifndef LIB_DIR
         LIB_DIR = $(PREFIX)/lib
     endif
 endif
+
 ifndef INCLUDE_DIR
     ifeq ($(OS), "Windows") 
         INCLUDE_DIR = $(PROGRAMFILES)\$(PROJECT_NAME)\import
@@ -200,7 +211,8 @@ RANLIB             = ranlib
 export AR
 export ARCH
 export ARFLAGS
-export BUILD_PATH 
+ecport BIN_DIR
+export BUILD_PATH
 export CC
 export COMPILER
 export CP

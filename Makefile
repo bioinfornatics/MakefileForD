@@ -100,7 +100,7 @@ $(DDOC_PATH)$(PATH_SEP)%.html : %.d
 
 	
 ############# CLEAN ############# 
-clean: clean-objects clean-sstatic-lib clean-doc clean-header clean-pkgfile
+clean: clean-objects clean-static-lib clean-doc clean-header clean-pkgfile
 	@echo ------------------ cleaning $^ done
 
 clean-objects:
@@ -109,7 +109,7 @@ clean-objects:
 clean-shared-objects:
 	$(RM) $(PICOBJECTS)
 
-clean-sstatic-lib:
+clean-static-lib:
 	$(RM) $(SONAME)
 	
 clean-shared-lib:
@@ -135,14 +135,14 @@ clean-pkgfile:
 	
 ############# INSTALL #############
 	
-install: install-sstatic-lib install-doc install-header install-pkgfile
+install: install-static-lib install-doc install-header install-pkgfile
 	@echo ------------------ Installing $^ done
 
-install-sstatic-lib:
+install-static-lib:
 	$(MKDIR) $(LIB_DIR)
 	$(CP) $(DLIB_PATH)$(PATH_SEP)$(LIBNAME) $(LIB_DIR)
 
-install-sstatic-lib:
+install-static-lib:
 	$(MKDIR) $(LIB_DIR)
 	$(CP) $(DLIB_PATH)$(PATH_SEP)$(SONAME) $(LIB_DIR)
 	
