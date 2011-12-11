@@ -5,7 +5,7 @@ export DESCRIPTION  =
 export VERSION      = 
 export LICENSE      = 
 SOURCES             = 
-DDOCFILES	        =
+DDOCFILES           =
 
 # include some command
 include command.make
@@ -161,15 +161,15 @@ install-header:
 	$(MKDIR) $(INCLUDE_DIR)
 	$(CP) $(IMPORT_PATH) $(INCLUDE_DIR)
 	@echo ------------------ Installing header done
-	
+
 install-doc:
 	$(MKDIR) $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)normal_doc$(PATH_SEP)
-	$(CP) $(DOC_PATH)$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)* $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)normal_doc$(PATH_SEP)
+	$(foreach DOC,$(DOCUMENTATIONS), $(CP) $(DOC) $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)normal_doc$(PATH_SEP);)
 	@echo ------------------ Installing doc done
-	
+
 install-ddoc:
 	$(MKDIR) $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
-	$(CP) $(DDOC_PATH)$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)* $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
+	$(foreach DOC,$(DDOCUMENTATIONS), $(CP) $(DOC) $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP);)
 	$(CP) $(DDOC_PATH)$(PATH_SEP)index.html $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
 	@echo ------------------ Installing ddoc done
 
