@@ -24,7 +24,7 @@ endef
 	
 ############# BUILD ############# 
 all: static-lib header doc pkgfile
-	@echo ------------------ building $^ done
+	@echo ------------------ Building $^ done
 
 .PHONY : pkgfile
 .PHONY : doc
@@ -38,19 +38,19 @@ shared-lib: $(SONAME)
 header: $(HEADERS)
 
 doc: $(DOCUMENTATIONS)
-	@echo ------------------ creating DDoc done
+	@echo ------------------ Creating DDoc done
 
 ddoc: $(DDOCUMENTATIONS)
 	$(DC) $(DDOC_FLAGS) index.d $(DF)$(DDOC_PATH)$(PATH_SEP)index.html
-	@echo ------------------ creating cute DDoc done
+	@echo ------------------ Building cute DDoc done
 
 geany-tag:
-	@echo ------------------ creating geany tag
+	@echo ------------------ Building geany tag
 	$(MKDIR) geany_config
 	geany -c geany_config -g $(PROJECT_NAME).d.tags $(SOURCES)
 
 pkgfile:
-	@echo ------------------ creating pkg-config file
+	@echo ------------------ Building pkg-config file
 	@echo "# Package Information for pkg-config"                        >  $(PKG_CONFIG_FILE)
 	@echo "# Author: $(AUTHOR)"                                         >> $(PKG_CONFIG_FILE)
 	@echo "# Created: `date`"                                           >> $(PKG_CONFIG_FILE)
@@ -71,12 +71,12 @@ pkgfile:
 
 # For build lib need create object files and after run make-lib
 $(LIBNAME): $(OBJECTS)
-	@echo ------------------ creating static library
+	@echo ------------------ Building static library
 	$(make-lib)
 	
 # For build shared lib need create shared object files
 $(SONAME): $(PICOBJECTS)
-	@echo ------------------ creating shared library
+	@echo ------------------ Building shared library
 	$(MKDIR) $(DLIB_PATH)
 	$(CC) -shared $^ -o $(DLIB_PATH)$(PATH_SEP)$@
 
