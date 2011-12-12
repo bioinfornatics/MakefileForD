@@ -159,7 +159,7 @@ install-shared-lib:
 	
 install-header:
 	$(MKDIR) $(INCLUDE_DIR)
-	$(CP) $(IMPORT_PATH) $(INCLUDE_DIR)
+	$(CP) $(IMPORT_PATH)$(PATH_SEP)* $(INCLUDE_DIR)
 	@echo ------------------ Installing header done
 
 install-doc:
