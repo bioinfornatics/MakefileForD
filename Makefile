@@ -1,10 +1,10 @@
 
-export PROJECT_NAME = 
-export AUTHOR       = 
-export DESCRIPTION  = 
-export VERSION      = 
-export LICENSE      = 
-SOURCES             = 
+export PROJECT_NAME =
+export AUTHOR       =
+export DESCRIPTION  =
+export VERSION      =
+export LICENSE      =
+SOURCES             =
 DDOCFILES           =
 
 # include some command
@@ -21,8 +21,8 @@ define make-lib
 	$(AR) rcs $(DLIB_PATH)$(PATH_SEP)$@ $^
 	$(RANLIB) $(DLIB_PATH)$(PATH_SEP)$@
 endef
-	
-############# BUILD ############# 
+
+############# BUILD #############
 all: static-lib header doc pkgfile
 	@echo ------------------ Building $^ done
 
@@ -67,13 +67,13 @@ pkgfile:
 	@echo Libs: -L$(LIB_DIR) $(LINKERFLAG)-l$(PROJECT_NAME)-$(COMPILER) >> $(PKG_CONFIG_FILE)
 	@echo Cflags: -I$(INCLUDE_DIR)                                      >> $(PKG_CONFIG_FILE)
 	@echo                                                               >> $(PKG_CONFIG_FILE)
-	
+
 
 # For build lib need create object files and after run make-lib
 $(LIBNAME): $(OBJECTS)
 	@echo ------------------ Building static library
 	$(make-lib)
-	
+
 # For build shared lib need create shared object files
 $(SONAME): $(PICOBJECTS)
 	@echo ------------------ Building shared library
@@ -82,32 +82,32 @@ $(SONAME): $(PICOBJECTS)
 
 # create object files
 $(BUILD_PATH)$(PATH_SEP)%.o : %.d
-	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c $< $(OUTPUT)$@
+	$(DC) $(DCFLAGS) $(DCFLAGS_LINK) $(DCFLAGS_IMPORT) -c $< $(OUTPUT)$@
 
 # create shared object files
 $(BUILD_PATH)$(PATH_SEP)%.pic.o : %.d
-	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(FPIC) $(DFLAGS_IMPORT) -c $< $(OUTPUT)$@
+	$(DC) $(DCFLAGS) $(DCFLAGS_LINK) $(FPIC) $(DCFLAGS_IMPORT) -c $< $(OUTPUT)$@
 
 # Generate Header files
 $(IMPORT_PATH)$(PATH_SEP)%.di : %.d
-	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c $(NO_OBJ) $< $(HF)$@
+	$(DC) $(DCFLAGS) $(DCFLAGS_LINK) $(DCFLAGS_IMPORT) -c $(NO_OBJ) $< $(HF)$@
 
 # Generate Documentation
 $(DOC_PATH)$(PATH_SEP)%.html : %.d
-	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c $(NO_OBJ)  $< $(DF)$@
-	
+	$(DC) $(DCFLAGS) $(DCFLAGS_LINK) $(DCFLAGS_IMPORT) -c $(NO_OBJ)  $< $(DF)$@
+
 # Generate ddoc Documentation
 $(DDOC_PATH)$(PATH_SEP)%.html : %.d
-	$(DC) $(DFLAGS) $(DFLAGS_LINK) $(DFLAGS_IMPORT) -c $(NO_OBJ) $(DDOC_FLAGS) $< $(DF)$@
-	
-############# CLEAN ############# 
+	$(DC) $(DCFLAGS) $(DCFLAGS_LINK) $(DCFLAGS_IMPORT) -c $(NO_OBJ) $(DDOC_FLAGS) $< $(DF)$@
+
+############# CLEAN #############
 clean: clean-objects clean-static-lib clean-doc clean-header clean-pkgfile
 	@echo ------------------ Cleaning $^ done
 
 clean-objects:
 	$(RM) $(OBJECTS)
 	@echo ------------------ Cleaning objects done
-	
+
 clean-shared-objects:
 	$(RM) $(PICOBJECTS)
 	@echo ------------------ Cleaning shared-object done
@@ -115,20 +115,20 @@ clean-shared-objects:
 clean-static-lib:
 	$(RM) $(SONAME)
 	@echo ------------------ Cleaning static-lib done
-	
+
 clean-shared-lib:
 	$(RM) $(LIBNAME)
 	@echo ------------------ Cleaning shared-lib done
-	
+
 clean-header:
 	$(RM) $(HEADERS)
 	@echo ------------------ Cleaning header done
-	
+
 clean-doc:
 	$(RM) $(DOCUMENTATIONS)
 	$(RM) $(DOC_PATH)
 	@echo ------------------ Cleaning doc done
-	
+
 clean-ddoc:
 	$(RM) $(DDOC_PATH)$(PATH_SEP)index.html
 	$(RM) $(DDOC_PATH)
@@ -141,9 +141,9 @@ clean-geany-tag:
 clean-pkgfile:
 	$(RM) $(PKG_CONFIG_FILE)
 	@echo ------------------ Cleaning pkgfile done
-	
+
 ############# INSTALL #############
-	
+
 install: install-static-lib install-doc install-header install-pkgfile
 	@echo ------------------ Installing $^ done
 
@@ -156,7 +156,7 @@ install-shared-lib:
 	$(MKDIR) $(LIB_DIR)
 	$(CP) $(DLIB_PATH)$(PATH_SEP)$(SONAME) $(LIB_DIR)
 	@echo ------------------ Installing shared-lib done
-	
+
 install-header:
 	$(MKDIR) $(INCLUDE_DIR)
 	$(CP) $(IMPORT_PATH)$(PATH_SEP)* $(INCLUDE_DIR)
@@ -181,4 +181,3 @@ install-pkgfile:
 	$(MKDIR) $(PKGCONFIG_DIR)
 	$(CP) $(PKG_CONFIG_FILE) $(PKGCONFIG_DIR)
 	@echo ------------------ Installing pkgfile done
-	
