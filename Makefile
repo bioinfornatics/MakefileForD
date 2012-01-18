@@ -149,42 +149,42 @@ clean-pkgfile:
 
 install: install-static-lib install-doc install-header install-pkgfile
 	@echo ------------------ Installing $^ done
-	
+
 install: install-shared-lib install-doc install-header install-pkgfile
 	@echo ------------------ Installing $^ done
 
 install-static-lib:
 	$(MKDIR) $(LIB_DIR)
-	$(CP) $(DLIB_PATH)$(PATH_SEP)$(LIBNAME) $(DESTDIR)$(PATH_SEP)$(LIB_DIR)
+	$(CP) $(DLIB_PATH)$(PATH_SEP)$(LIBNAME) $(DESTDIR)$(LIB_DIR)
 	@echo ------------------ Installing static-lib done
 
 install-shared-lib:
 	$(MKDIR) $(LIB_DIR)
-	$(CP) $(DLIB_PATH)$(PATH_SEP)$(SONAME) $(DESTDIR)$(PATH_SEP)$(LIB_DIR)
-	ln -s $(DESTDIR)$(PATH_SEP)$(LIB_DIR)$(SONAME).$(SO_VERSION)   $(DESTDIR)$(PATH_SEP)$(LIB_DIR)$(PATH_SEP)$(SONAME)
+	$(CP) $(DLIB_PATH)$(PATH_SEP)$(SONAME) $(DESTDIR)$(LIB_DIR)
+	ln -s $(DESTDIR)$(LIB_DIR)$(SONAME).$(SO_VERSION)   $(DESTDIR)$(LIB_DIR)$(PATH_SEP)$(SONAME)
 	@echo ------------------ Installing shared-lib done
 
 install-header:
 	$(MKDIR) $(INCLUDE_DIR)
-	$(CP) $(IMPORT_PATH)$(PATH_SEP)* $(DESTDIR)$(PATH_SEP)$(INCLUDE_DIR)
+	$(CP) $(IMPORT_PATH)$(PATH_SEP)* $(DESTDIR)$(INCLUDE_DIR)
 	@echo ------------------ Installing header done
 
 install-doc:
 	$(MKDIR) $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)normal_doc$(PATH_SEP)
-	$(CP) $(DOC_PATH)$(PATH_SEP)* $(DESTDIR)$(PATH_SEP)$(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)normal_doc$(PATH_SEP)
+	$(CP) $(DOC_PATH)$(PATH_SEP)* $(DESTDIR)$(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)normal_doc$(PATH_SEP)
 	@echo ------------------ Installing doc done
 
 install-ddoc:
 	$(MKDIR) $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
-	$(CP) $(DDOC_PATH)$(PATH_SEP)* $(DESTDIR)$(PATH_SEP)$(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
+	$(CP) $(DDOC_PATH)$(PATH_SEP)* $(DESTDIR)$(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
 	@echo ------------------ Installing ddoc done
 
 install-geany-tag:
 	$(MKDIR) $(DATA_DIR)$(PATH_SEP)geany$(PATH_SEP)tags$(PATH_SEP)
-	$(CP) $(PROJECT_NAME).d.tags $(DESTDIR)$(PATH_SEP)$(DATA_DIR)$(PATH_SEP)geany$(PATH_SEP)tags$(PATH_SEP)
+	$(CP) $(PROJECT_NAME).d.tags $(DESTDIR)$(DATA_DIR)$(PATH_SEP)geany$(PATH_SEP)tags$(PATH_SEP)
 	@echo ------------------ Installing geany tag done
 
 install-pkgfile:
 	$(MKDIR) $(PKGCONFIG_DIR)
-	$(CP) $(PKG_CONFIG_FILE) $(DESTDIR)$(PATH_SEP)$(PKGCONFIG_DIR)
+	$(CP) $(PKG_CONFIG_FILE) $(DESTDIR)$(PKGCONFIG_DIR)
 	@echo ------------------ Installing pkgfile done
