@@ -21,6 +21,12 @@ else
         OS              = "Solaris"
         FixPath         = $1
         message         = @(echo \033[31m $1 \033[0;0m1)
+    else ifeq ($(shell uname),Freebsd)
+        STATIC_LIB_EXT  = .a
+        DYNAMIC_LIB_EXT = .so
+        OS              = "Freebsd"
+        FixPath         = $1
+        message         = @(echo \033[31m $1 \033[0;0m1)
     else ifeq ($(shell uname),Darwin)
         STATIC_LIB_EXT  = .a
         DYNAMIC_LIB_EXT = .so
@@ -37,6 +43,16 @@ ifeq ($(OS),"Windows")
     MKDIR = mkdir
     MV    = move
 else ifeq ($(OS),"Linux")
+    RM    = rm -fr
+    CP    = cp -fr
+    MKDIR = mkdir -p
+    MV    = mv
+else ifeq ($(OS),"Freebsd")
+    RM    = rm -fr
+    CP    = cp -fr
+    MKDIR = mkdir -p
+    MV    = mv
+else ifeq ($(OS),"Solaris")
     RM    = rm -fr
     CP    = cp -fr
     MKDIR = mkdir -p
@@ -130,7 +146,7 @@ endif
 ifndef DESTDIR
     DESTDIR =
 endif
-    
+
 # Define var PREFIX, BIN_DIR, LIB_DIR, INCLUDE_DIR, DATA_DIR
 ifndef PREFIX
     ifeq ($(OS),"Windows")
