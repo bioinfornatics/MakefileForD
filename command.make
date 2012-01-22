@@ -3,7 +3,6 @@ ifdef SystemRoot
     STATIC_LIB_EXT  = .lib
     DYNAMIC_LIB_EXT = .dll
     PATH_SEP        =\
-    FixPath         = $(subst /,\,$1)
     message         = @(echo $1)
     SHELL           = cmd.exe
     Filter          = %/linux/%.d %/darwin/%.d %/freebsd/%.d %/solaris/%.d
@@ -16,28 +15,24 @@ else
         OS              = "Linux"
         STATIC_LIB_EXT  = .a
         DYNAMIC_LIB_EXT = .so
-        FixPath         = $1
         message         = @(echo \033[31m $1 \033[0;0m1)
         Filter          = %/win32/%.d %/darwin/%.d %/freebsd/%.d %/solaris/%.d
     else ifeq ($(shell uname), Solaris)
         STATIC_LIB_EXT  = .a
         DYNAMIC_LIB_EXT = .so
         OS              = "Solaris"
-        FixPath         = $1
         message         = @(echo \033[31m $1 \033[0;0m1)
         Filter          = %/win32/%.d %/linux/%.d %/darwin/%.d %/freebsd/%.d
     else ifeq ($(shell uname),Freebsd)
         STATIC_LIB_EXT  = .a
         DYNAMIC_LIB_EXT = .so
         OS              = "Freebsd"
-        FixPath         = $1
         message         = @(echo \033[31m $1 \033[0;0m1)
         Filter          = %/win32/%.d %/linux/%.d %/darwin/%.d %/solaris/%.d
     else ifeq ($(shell uname),Darwin)
         STATIC_LIB_EXT  = .a
         DYNAMIC_LIB_EXT = .so
         OS              = "Darwin"
-        FixPath         = $1
         message         = @(echo \033[31m $1 \033[0;0m1)
         Filter          = %/win32/%.d %/linux/%.d %/freebsd/%.d %/solaris/%.d
     endif
