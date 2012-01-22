@@ -6,33 +6,40 @@ ifdef SystemRoot
     FixPath         = $(subst /,\,$1)
     message         = @(echo $1)
     SHELL           = cmd.exe
+    Filter          = %/linux/%.d %/darwin/%.d %/freebsd/%.d %/solaris/%.d
+    getSource       =$(shell dir tango /s /b)
 else
     SHELL           = sh
     PATH_SEP        =/
+    getSource       =$(shell find tango -name "*.d")
     ifeq ($(shell uname), Linux)
         OS              = "Linux"
         STATIC_LIB_EXT  = .a
         DYNAMIC_LIB_EXT = .so
         FixPath         = $1
         message         = @(echo \033[31m $1 \033[0;0m1)
+        Filter          = %/win32/%.d %/darwin/%.d %/freebsd/%.d %/solaris/%.d
     else ifeq ($(shell uname), Solaris)
         STATIC_LIB_EXT  = .a
         DYNAMIC_LIB_EXT = .so
         OS              = "Solaris"
         FixPath         = $1
         message         = @(echo \033[31m $1 \033[0;0m1)
+        Filter          = %/win32/%.d %/linux/%.d %/darwin/%.d %/freebsd/%.d
     else ifeq ($(shell uname),Freebsd)
         STATIC_LIB_EXT  = .a
         DYNAMIC_LIB_EXT = .so
         OS              = "Freebsd"
         FixPath         = $1
         message         = @(echo \033[31m $1 \033[0;0m1)
+        Filter          = %/win32/%.d %/linux/%.d %/darwin/%.d %/solaris/%.d
     else ifeq ($(shell uname),Darwin)
         STATIC_LIB_EXT  = .a
         DYNAMIC_LIB_EXT = .so
         OS              = "Darwin"
         FixPath         = $1
         message         = @(echo \033[31m $1 \033[0;0m1)
+        Filter          = %/win32/%.d %/linux/%.d %/freebsd/%.d %/solaris/%.d
     endif
 endif
 
@@ -125,8 +132,18 @@ ifeq ($(OS),"Linux")
     LDCFLAGS += $(LINKERFLAG)-ldl
 endif
 
-# If model are not gieven take the same as current system
-ARCH = $(shell arch || uname -m)
+# If model are not given take the same as current system
+ifndef ARCH
+    ifeq ($(OS),"Windows")
+        ifeq($(PROCESSOR_ARCHITECTURE), x86)
+            ARCH = x86
+        else
+            ARCH = x86_64
+        endif
+    else
+        ARCH = $(shell arch || uname -m)
+    endif
+endif
 ifndef MODEL
     ifeq ($(ARCH), x86_64)
         MODEL = 64
