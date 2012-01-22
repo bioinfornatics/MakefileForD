@@ -7,11 +7,11 @@ ifdef SystemRoot
     message         = @(echo $1)
     SHELL           = cmd.exe
     Filter          = %/linux/%.d %/darwin/%.d %/freebsd/%.d %/solaris/%.d
-    getSource       =$(shell dir tango /s /b)
+    getSource       =$(shell dir $(ROOT_SOURCE_DIR) /s /b)
 else
     SHELL           = sh
     PATH_SEP        =/
-    getSource       =$(shell find tango -name "*.d")
+    getSource       =$(shell find $(ROOT_SOURCE_DIR) -name "*.d")
     ifeq ($(shell uname), Linux)
         OS              = "Linux"
         STATIC_LIB_EXT  = .a

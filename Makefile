@@ -4,12 +4,13 @@ export AUTHOR           =
 export DESCRIPTION      =
 export VERSION          =
 export LICENSE          =
-SOURCES                 =
+export ROOT_SOURCE_DIR  =
 DDOCFILES               =
 
 # include some command
 include command.make
 
+SOURCES             = $(getSource)
 OBJECTS             = $(patsubst %.d,$(BUILD_PATH)$(PATH_SEP)%.o,    $(SOURCES))
 PICOBJECTS          = $(patsubst %.d,$(BUILD_PATH)$(PATH_SEP)%.pic.o,$(SOURCES))
 HEADERS             = $(patsubst %.d,$(IMPORT_PATH)$(PATH_SEP)%.di,  $(SOURCES))
