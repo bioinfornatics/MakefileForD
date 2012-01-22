@@ -135,7 +135,7 @@ endif
 # If model are not given take the same as current system
 ifndef ARCH
     ifeq ($(OS),"Windows")
-        ifeq($(PROCESSOR_ARCHITECTURE), x86)
+        ifeq ($(PROCESSOR_ARCHITECTURE), x86)
             ARCH = x86
         else
             ARCH = x86_64
