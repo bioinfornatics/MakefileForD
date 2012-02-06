@@ -100,33 +100,40 @@ endif
 
 #define a suffix lib who inform is build with which compiler, name of phobos lib
 ifeq ($(DC),gdc)
-    COMPILER=gdc
-    PHOBOS=libgphobos2
-    DRUNTIME=libgdruntime
+    COMPILER  = gdc
+    VERSION   = -fversion
+    PHOBOS    = libgphobos2
+    DRUNTIME  = libgdruntime
 else ifeq ($(DC),gdmd)
-    COMPILER=gdc
-    PHOBOS=libgphobos2
-    DRUNTIME=libgdruntime
+    COMPILER  = gdc
+    VERSION   = -fversion
+    PHOBOS    = libgphobos2
+    DRUNTIME  = libgdruntime
 else ifeq ($(DC),ldc)
-    COMPILER=ldc
-    PHOBOS=libphobos2-ldc
-    DRUNTIME=libdruntime-ldc
+    COMPILER  = ldc
+    VERSION   = -d-version
+    PHOBOS    = libphobos2-ldc
+    DRUNTIME  = libdruntime-ldc
 else ifeq ($(DC),ldc2)
-    COMPILER=ldc
-    PHOBOS=libphobos2-ldc
-    DRUNTIME=libdruntime-ldc
+    COMPILER  = ldc
+    VERSION   = -d-version
+    PHOBOS    = libphobos2-ldc
+    DRUNTIME  = libdruntime-ldc
 else ifeq ($(DC),ldmd)
-    COMPILER=ldc
-    PHOBOS=libphobos2-ldc
-    DRUNTIME=libdruntime-ldc
+    COMPILER  = ldc
+    VERSION   = -d-version
+    PHOBOS    = libphobos2-ldc
+    DRUNTIME  = libdruntime-ldc
 else ifeq ($(DC),dmd)
-    COMPILER=dmd
-    PHOBOS=libphobos2
-    DRUNTIME=libdruntime
+    COMPILER  = dmd
+    VERSION   = -version
+    PHOBOS    = libphobos2
+    DRUNTIME  = libdruntime
 else ifeq ($(DC),dmd2)
-    COMPILER=dmd
-    PHOBOS=libphobos2
-    DRUNTIME=libdruntime
+    COMPILER  = dmd
+    VERSION   = -d-version
+    PHOBOS    = libphobos2
+    DRUNTIME  = libdruntime
 endif
 
 # Define relocation model for ldc or other
