@@ -2,9 +2,9 @@
 export PROJECT_NAME     =
 export AUTHOR           =
 export DESCRIPTION      =
-export MAJOR_VERSION    =
-export MINOR_VERSION    =
-export PATCH_VERSION    =
+export MAJOR_VERSION    =1
+export MINOR_VERSION    =0
+export PATCH_VERSION    =0
 export VERSION          = $(MAJOR_VERSION).$(MINOR_VERSION).$(PATCH_VERSION)
 export LICENSE          =
 export ROOT_SOURCE_DIR  =
