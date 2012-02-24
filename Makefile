@@ -2,7 +2,10 @@
 export PROJECT_NAME     =
 export AUTHOR           =
 export DESCRIPTION      =
-export VERSION          =
+export MAJOR_VERSION    =
+export MINOR_VERSION    =
+export PATCH_VERSION    =
+export VERSION          = $(MAJOR_VERSION).$(MINOR_VERSION).$(PATCH_VERSION)
 export LICENSE          =
 export ROOT_SOURCE_DIR  =
 DDOCFILES               =
