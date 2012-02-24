@@ -44,26 +44,31 @@ ifeq ($(OS),"Windows")
     CP    = copy /Y
     MKDIR = mkdir
     MV    = move
+    LN    = mklink
 else ifeq ($(OS),"Linux")
     RM    = rm -fr
     CP    = cp -fr
     MKDIR = mkdir -p
     MV    = mv
+    LN    = ln -s
 else ifeq ($(OS),"Freebsd")
     RM    = rm -fr
     CP    = cp -fr
     MKDIR = mkdir -p
     MV    = mv
+    LN    = ln -s
 else ifeq ($(OS),"Solaris")
     RM    = rm -fr
     CP    = cp -fr
     MKDIR = mkdir -p
     MV    = mv
+    LN    = ln -s
 else ifeq ($(OS),"Darwin")
     RM    = rm -fr
     CP    = cp -fr
     MKDIR = mkdir -p
     MV    = mv
+    LN    = ln -s
 endif
 
 # If compiler is not define try to find it
@@ -100,40 +105,47 @@ endif
 
 #define a suffix lib who inform is build with which compiler, name of phobos lib
 ifeq ($(DC),gdc)
-    COMPILER  = gdc
-    VERSION   = -fversion
-    PHOBOS    = libgphobos2
-    DRUNTIME  = libgdruntime
+    COMPILER    = gdc
+    VERSION     = -fversion
+    SONAME_FLAG = $(LINKERFLAG) -soname
+    PHOBOS      = libgphobos2
+    DRUNTIME    = libgdruntime
 else ifeq ($(DC),gdmd)
-    COMPILER  = gdc
-    VERSION   = -fversion
-    PHOBOS    = libgphobos2
-    DRUNTIME  = libgdruntime
+    COMPILER    = gdc
+    VERSION     = -fversion
+    SONAME_FLAG = $(LINKERFLAG) -soname
+    PHOBOS      = libgphobos2
+    DRUNTIME    = libgdruntime
 else ifeq ($(DC),ldc)
-    COMPILER  = ldc
-    VERSION   = -d-version
-    PHOBOS    = libphobos2-ldc
-    DRUNTIME  = libdruntime-ldc
+    COMPILER    = ldc
+    VERSION     = -d-version
+    SONAME_FLAG = -soname
+    PHOBOS      = libphobos-ldc
+    DRUNTIME    = libdruntime-ldc
 else ifeq ($(DC),ldc2)
-    COMPILER  = ldc
-    VERSION   = -d-version
-    PHOBOS    = libphobos2-ldc
-    DRUNTIME  = libdruntime-ldc
+    COMPILER    = ldc
+    VERSION     = -d-version
+    SONAME_FLAG = -soname
+    PHOBOS      = libphobos-ldc
+    DRUNTIME    = libdruntime-ldc
 else ifeq ($(DC),ldmd)
-    COMPILER  = ldc
-    VERSION   = -d-version
-    PHOBOS    = libphobos2-ldc
-    DRUNTIME  = libdruntime-ldc
+    COMPILER    = ldc
+    VERSION     = -d-version
+    SONAME_FLAG = -soname
+    PHOBOS      = libphobos2-ldc
+    DRUNTIME    = libdruntime-ldc
 else ifeq ($(DC),dmd)
-    COMPILER  = dmd
-    VERSION   = -version
-    PHOBOS    = libphobos2
-    DRUNTIME  = libdruntime
+    COMPILER    = dmd
+    VERSION     = -version
+    SONAME_FLAG = $(LINKERFLAG) -soname
+    PHOBOS      = libphobos2
+    DRUNTIME    = libdruntime
 else ifeq ($(DC),dmd2)
-    COMPILER  = dmd
-    VERSION   = -d-version
-    PHOBOS    = libphobos2
-    DRUNTIME  = libdruntime
+    COMPILER    = dmd
+    VERSION     = -d-version
+    SONAME_FLAG = $(LINKERFLAG) -soname
+    PHOBOS      = libphobos2
+    DRUNTIME    = libdruntime
 endif
 
 # Define relocation model for ldc or other
