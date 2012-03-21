@@ -108,44 +108,44 @@ ifeq ($(DC),gdc)
     COMPILER    = gdc
     VERSION     = -fversion
     SONAME_FLAG = $(LINKERFLAG) -soname
-    PHOBOS      = libgphobos2
-    DRUNTIME    = libgdruntime
+    PHOBOS      = gphobos2
+    DRUNTIME    = gdruntime
 else ifeq ($(DC),gdmd)
     COMPILER    = gdc
     VERSION     = -fversion
     SONAME_FLAG = $(LINKERFLAG) -soname
-    PHOBOS      = libgphobos2
-    DRUNTIME    = libgdruntime
+    PHOBOS      = gphobos2
+    DRUNTIME    = gdruntime
 else ifeq ($(DC),ldc)
     COMPILER    = ldc
     VERSION     = -d-version
     SONAME_FLAG = -soname
-    PHOBOS      = libphobos-ldc
-    DRUNTIME    = libdruntime-ldc
+    PHOBOS      = phobos-ldc
+    DRUNTIME    = druntime-ldc
 else ifeq ($(DC),ldc2)
     COMPILER    = ldc
     VERSION     = -d-version
     SONAME_FLAG = -soname
-    PHOBOS      = libphobos-ldc
-    DRUNTIME    = libdruntime-ldc
+    PHOBOS      = phobos-ldc
+    DRUNTIME    = druntime-ldc
 else ifeq ($(DC),ldmd)
     COMPILER    = ldc
     VERSION     = -d-version
     SONAME_FLAG = -soname
-    PHOBOS      = libphobos2-ldc
-    DRUNTIME    = libdruntime-ldc
+    PHOBOS      = phobos2-ldc
+    DRUNTIME    = druntime-ldc
 else ifeq ($(DC),dmd)
     COMPILER    = dmd
     VERSION     = -version
-    SONAME_FLAG = $(LINKERFLAG) -soname
-    PHOBOS      = libphobos2
-    DRUNTIME    = libdruntime
+    SONAME_FLAG = $(LINKERFLAG)-soname
+    PHOBOS      = phobos2
+    DRUNTIME    = druntime
 else ifeq ($(DC),dmd2)
     COMPILER    = dmd
     VERSION     = -d-version
-    SONAME_FLAG = $(LINKERFLAG) -soname
-    PHOBOS      = libphobos2
-    DRUNTIME    = libdruntime
+    SONAME_FLAG = $(LINKERFLAG)-soname
+    PHOBOS      = phobos2
+    DRUNTIME    = druntime
 endif
 
 # Define relocation model for ldc or other
@@ -259,8 +259,8 @@ BUILD_PATH          = ./build
 DCFLAGS_IMPORT      =
 DCFLAGS_LINK        = $(LDCFLAGS)
 
-LIBNAME             = lib$(PROJECT_NAME)-$(COMPILER)$(STATIC_LIB_EXT)
-SONAME              = lib$(PROJECT_NAME)-$(COMPILER)$(DYNAMIC_LIB_EXT)
+STATIC_LIBNAME      = lib$(PROJECT_NAME)-$(COMPILER)$(STATIC_LIB_EXT)
+SHARED_LIBNAME      = lib$(PROJECT_NAME)-$(COMPILER)$(DYNAMIC_LIB_EXT)
 
 PKG_CONFIG_FILE     = $(PROJECT_NAME).pc
 

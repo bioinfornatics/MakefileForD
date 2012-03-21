@@ -2,13 +2,15 @@
 export PROJECT_NAME     =
 export AUTHOR           =
 export DESCRIPTION      =
+export REPO_SRC_DIR     =
+export LOGO_SRC         =
 export MAJOR_VERSION    = 1
 export MINOR_VERSION    = 0
 export PATCH_VERSION    = 0
 export PROJECT_VERSION  = $(MAJOR_VERSION).$(MINOR_VERSION).$(PATCH_VERSION)
 export LICENSE          =
 export ROOT_SOURCE_DIR  =
-DDOCFILES               =
+DDOCFILES               = modules.ddoc settings.ddoc cutedoc.ddoc
 
 # include some command
 include command.make
@@ -42,18 +44,18 @@ all-shared: shared-lib header doc pkgfile-shared
 .PHONY : ddoc
 .PHONY : clean
 
-static-lib: $(LIBNAME)
+static-lib: $(STATIC_LIBNAME)
 
-shared-lib: $(SONAME)
+shared-lib: $(SHARED_LIBNAME)
 
 header: $(HEADERS)
 
 doc: $(DOCUMENTATIONS)
 	@echo ------------------ Building Doc done
 
-ddoc: $(DDOCUMENTATIONS)
-	$(DC) $(DDOC_FLAGS) index.d $(DF)$(DDOC_PATH)$(PATH_SEP)index.html
+ddoc: settings.ddoc $(DDOCUMENTATIONS)
 	@echo ------------------ Building DDoc done
+#	$(DC) $(DDOC_FLAGS) index.d $(DF)$(DDOC_PATH)$(PATH_SEP)index.html
 
 geany-tag:
 	@echo ------------------ Building geany tag
@@ -94,22 +96,29 @@ pkgfile-static:
 	@echo Name: "$(PROJECT_NAME)"                                       >> $(PKG_CONFIG_FILE)
 	@echo Description: "$(DESCRIPTION)"                                 >> $(PKG_CONFIG_FILE)
 	@echo Version: "$(PROJECT_VERSION)"                                 >> $(PKG_CONFIG_FILE)
-	@echo Libs: $(LIB_DIR)$(PATH_SEP)$(LIBNAME)                         >> $(PKG_CONFIG_FILE)
+	@echo Libs: $(LIB_DIR)$(PATH_SEP)$(STATIC_LIBNAME)                  >> $(PKG_CONFIG_FILE)
 	@echo Cflags: -I$(INCLUDE_DIR)$(PATH_SEP)$(PROJECT_NAME) $(LDCFLAGS)>> $(PKG_CONFIG_FILE)
 	@echo                                                               >> $(PKG_CONFIG_FILE)
 
-
+settings.ddoc:
+	@echo "PROJECTNAME  = $(PROJECT_NAME)"                              >  settings.ddoc
+	@echo "LINKPREFIX   = $(LINKERFLAG)"                                >> settings.ddoc
+	@echo "REPOSRCDIR   = $(REPO_SRC_DIR)"                              >> settings.ddoc
+	@echo "ROOT         = $(ROOT_SOURCE_DIR)"                           >> settings.ddoc
+	@echo "LOGOSRC      = $(LOGO_SRC)"                                  >> settings.ddoc
+	@echo "LOGOALT      = $(PROJECT_NAME)"                              >> settings.ddoc
+    
 # For build lib need create object files and after run make-lib
-$(LIBNAME): $(OBJECTS)
+$(STATIC_LIBNAME): $(OBJECTS)
 	@echo ------------------ Building static library
 	$(make-lib)
 
 # For build shared lib need create shared object files
-$(SONAME): $(PICOBJECTS)
+$(SHARED_LIBNAME): $(PICOBJECTS)
 	@echo ------------------ Building shared library
 	$(MKDIR) $(DLIB_PATH)
-	$(CC) -shared -Wl,-soname,$@.$(MAJOR_VERSION) -o $(DLIB_PATH)$(PATH_SEP)$@.$(MAJOR_VERSION) $^
-# $(DC) -shared $(SONAME_FLAG) $@.$(MAJOR_VERSION) $(OUTPUT)$(DLIB_PATH)$(PATH_SEP)$@.$(MAJOR_VERSION) $^
+	$(DC) $(SONAME_FLAG) $@.$(MAJOR_VERSION) $(OUTPUT)$(DLIB_PATH)$(PATH_SEP)$@.$(MAJOR_VERSION) $^
+#$(CC) -l$(PHOBOS) -l$(DRUNTIME) -shared -Wl,-soname,$@.$(MAJOR_VERSION) -o $(DLIB_PATH)$(PATH_SEP)$@.$(MAJOR_VERSION) $^
 
 # create object files
 $(BUILD_PATH)$(PATH_SEP)%.o : %.d
@@ -147,11 +156,11 @@ clean-shared-objects:
 	@echo ------------------ Cleaning shared-object done
 
 clean-static-lib:
-	$(RM) $(DLIB_PATH)$(PATH_SEP)$(LIBNAME)
+	$(RM) $(DLIB_PATH)$(PATH_SEP)$(STATIC_LIBNAME)
 	@echo ------------------ Cleaning static-lib done
 
 clean-shared-lib:
-	$(RM)  $(DLIB_PATH)$(PATH_SEP)$(SONAME).$(MAJOR_VERSION)
+	$(RM)  $(DLIB_PATH)$(PATH_SEP)$(SHARED_LIBNAME).$(MAJOR_VERSION)
 	@echo ------------------ Cleaning shared-lib done
 
 clean-header:
@@ -165,6 +174,8 @@ clean-doc:
 
 clean-ddoc:
 	$(RM) $(DDOC_PATH)$(PATH_SEP)index.html
+	$(RM) $(DDOCUMENTATIONS)
+	$(RM) $(DDOC_PATH)$(PATH_SEP)$(PROJECT_NAME)
 	$(RM) $(DDOC_PATH)
 	@echo ------------------ Cleaning ddoc done
 
@@ -186,14 +197,14 @@ install-shared: install-shared-lib install-doc install-header install-pkgfile
 
 install-static-lib:
 	$(MKDIR) $(DESTDIR)$(LIB_DIR)
-	$(CP) $(DLIB_PATH)$(PATH_SEP)$(LIBNAME) $(DESTDIR)$(LIB_DIR)
+	$(CP) $(DLIB_PATH)$(PATH_SEP)$(STATIC_LIBNAME) $(DESTDIR)$(LIB_DIR)
 	@echo ------------------ Installing static-lib done
 
 install-shared-lib:
 	$(MKDIR) $(DESTDIR)$(LIB_DIR)
-	$(CP) $(DLIB_PATH)$(PATH_SEP)$(SONAME) $(DESTDIR)$(LIB_DIR)
-	cd $(DESTDIR)$(LIB_DIR)$(PATH_SEP) & $(LN) $(SHARED_LIBNAME)$(MAJOR_VERSION) $(SHARED_LIBNAME).$(VERSION_PROJECT)
-	cd $(DESTDIR)$(LIB_DIR)$(PATH_SEP) & $(LN) $(SHARED_LIBNAME).$(VERSION_PROJECT) $(SHARED_LIBNAME)
+	$(CP) $(DLIB_PATH)$(PATH_SEP)$(SHARED_LIBNAME).$(MAJOR_VERSION) $(DESTDIR)$(LIB_DIR)
+	cd $(DESTDIR)$(LIB_DIR)$(PATH_SEP) && $(LN) $(SHARED_LIBNAME).$(MAJOR_VERSION) $(SHARED_LIBNAME).$(PROJECT_VERSION)
+	cd $(DESTDIR)$(LIB_DIR)$(PATH_SEP) && $(LN) $(SHARED_LIBNAME).$(PROJECT_VERSION) $(SHARED_LIBNAME)
 	@echo ------------------ Installing shared-lib done
 
 install-header:

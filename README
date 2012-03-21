@@ -37,6 +37,9 @@ Set DFLAGS
 Set Include flag
  DFLAGS_IMPORT="-Idir1 -Idir2"
   
+Set compiler
+ $ make DC=dmd
+
 Generate tag for geany
  $ make geany-tag
  
@@ -44,6 +47,7 @@ Generate pkgconfig file
  $ make pkgfile
 
 Generate Ddoc
+ You need wrote in root dir a modules.ddoc file, afeter this do
  $ make ddoc
 
 Generate shared lib:
@@ -89,8 +93,8 @@ Feature:
 - Build as static lib or shared
 - Generate geany tag
 - Generate package config file
+- Generate both normal doc and cute doc
 
 TODO:
 -----
-- Use pkg-config for set flag when there are some dependencies
-- Add Windows support
+- Add Windows support (should work)
