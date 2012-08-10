@@ -13,12 +13,15 @@ In all case you need add command.make in same directory
 What you need to do:
 --------------------
  - take Makefile and command.make
- - put at root of your project
- - set variables into Makefile: PROJECT_NAME, AUTHOR, DESCRIPTION, VERSION, LICENSE, SOURCES 
+ - put it at root of your project
+ - set variables into Makefile: PROJECT_NAME, AUTHOR, DESCRIPTION, VERSION, LICENSE, SOURCES or ROOT_SOURCE_DIR
+
+It is recommended to put your sources files into a src dir and set var ROOT_SOURCE_DIR to src. Build systeme will found
+automatically sources files to build.
 
 Tips:
 -----
-when you need to write a pth like for set SOURCES var use $(PATH_SEP) instead / or \ this allow support both windows and *NIX
+when you need to write a path like for set SOURCES var use $(PATH_SEP) instead / or \ this allow support both windows and *NIX
  
 How build your project:
 -----------------------
