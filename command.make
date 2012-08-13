@@ -169,7 +169,7 @@ ifndef ARCH
             ARCH = x86_64
         endif
     else
-        ARCH = $(shell arch || uname -m)
+        ARCH = $(shell arch 2>/dev/null|| uname -m)
     endif
 endif
 ifndef MODEL
