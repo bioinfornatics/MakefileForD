@@ -7,19 +7,25 @@ ifdef SystemRoot
     SHELL           = cmd.exe
     Filter          = %/linux/%.d %/darwin/%.d %/freebsd/%.d %/solaris/%.d
     getSource       =$(shell dir $(ROOT_SOURCE_DIR) /s /b)
+else ifneq (,$(findstring /mingw/,$PATH))
+    OS              = "MinGW"
+    STATIC_LIB_EXT  = .lib
+    DYNAMIC_LIB_EXT = .dll
+    PATH_SEP        =\
+    message         = @(echo $1)
+    SHELL           = cmd.exe
+    Filter          = %/linux/%.d %/darwin/%.d %/freebsd/%.d %/solaris/%.d
+    getSource       =$(shell dir $(ROOT_SOURCE_DIR) /s /b)
 else
     SHELL           = sh
     PATH_SEP        =/
     getSource       =$(shell find $(ROOT_SOURCE_DIR) -name "*.d")
-    ifneq (,$(findstring /mingw/,$PATH))
-        OS = "MinGW"
-        STATIC_LIB_EXT  = .lib
-        DYNAMIC_LIB_EXT = .dll
-        PATH_SEP        =\
-        message         = @(echo $1)
-        SHELL           = cmd.exe
-        Filter          = %/linux/%.d %/darwin/%.d %/freebsd/%.d %/solaris/%.d
-        getSource       =$(shell dir $(ROOT_SOURCE_DIR) /s /b)
+    ifneq (,$(findstring /cygdrive/,$PATH))
+        OS              = "Cygwin"
+        STATIC_LIB_EXT  = .a
+        DYNAMIC_LIB_EXT = .so
+        message         = @(echo \033[31m $1 \033[0;0m1)
+        Filter          = %/win32/%.d %/darwin/%.d %/freebsd/%.d %/solaris/%.d
     else ifeq ($(shell uname), Linux)
         OS              = "Linux"
         STATIC_LIB_EXT  = .a
