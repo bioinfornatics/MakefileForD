@@ -11,7 +11,16 @@ else
     SHELL           = sh
     PATH_SEP        =/
     getSource       =$(shell find $(ROOT_SOURCE_DIR) -name "*.d")
-    ifeq ($(shell uname), Linux)
+    ifneq (,$(findstring /mingw/,$PATH))
+        OS = "MinGW"
+        STATIC_LIB_EXT  = .lib
+        DYNAMIC_LIB_EXT = .dll
+        PATH_SEP        =\
+        message         = @(echo $1)
+        SHELL           = cmd.exe
+        Filter          = %/linux/%.d %/darwin/%.d %/freebsd/%.d %/solaris/%.d
+        getSource       =$(shell dir $(ROOT_SOURCE_DIR) /s /b)
+    else ifeq ($(shell uname), Linux)
         OS              = "Linux"
         STATIC_LIB_EXT  = .a
         DYNAMIC_LIB_EXT = .so
