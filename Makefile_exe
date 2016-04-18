@@ -84,18 +84,18 @@ install: install-executable install-doc install-header
 	@echo ------------------ Installing $^ done
 
 install-executable:
-	$(MKDIR) $(BIN_DIR)
-	$(CP) $(EXE_NAME) $(BIN_DIR)
+	$(MKDIR) $(DESTDIR)$(BIN_DIR)
+	$(CP) $(EXE_NAME) $(DESTDIR)$(BIN_DIR)
 
 install-header:
-	$(MKDIR) $(INCLUDE_DIR)
-	$(CP) $(IMPORT_PATH) $(INCLUDE_DIR)
+	$(MKDIR) $(DESTDIR)$(INCLUDE_DIR)
+	$(CP) $(IMPORT_PATH) $(DESTDIR)$(INCLUDE_DIR)
 
 install-doc:
-	$(MKDIR) $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)normal_doc$(PATH_SEP)
-	$(CP) $(DOC_PATH) $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)normal_doc$(PATH_SEP)
+	$(MKDIR) $(DESTDIR)$(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)normal_doc$(PATH_SEP)
+	$(CP) $(DOC_PATH) $(DESTDIR)$(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)normal_doc$(PATH_SEP)
 
 install-ddoc:
-	$(MKDIR) $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
-	$(CP) $(DDOC_PATH) $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
-	$(CP) $(DDOC_PATH)$(PATH_SEP)index.html $(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
+	$(MKDIR) $(DESTDIR)$(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
+	$(CP) $(DDOC_PATH) $(DESTDIR)$(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
+	$(CP) $(DDOC_PATH)$(PATH_SEP)index.html $(DESTDIR)$(DATA_DIR)$(PATH_SEP)doc$(PATH_SEP)$(PROJECT_NAME)$(PATH_SEP)cute_doc$(PATH_SEP)
